@@ -143,10 +143,7 @@ function setUpColorsForSvg(svgContent) {
     `<style>.cls-1{fill:${experimentByColor.colors[0].innerColor};}.cls-2{fill:${experimentByColor.colors[0].outerColor};}</style>`
     + svgContent.substring(endStyleTag, svgContent.length);
 
-    const idTag = svgContent.replace('id=', 'random=')
-    
-
-    return 
+    return partialResult.replace('id=', 'random=')
 }
 
 function setPauseStepVisibility(visibility) {
