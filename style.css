@@ -1,0 +1,21 @@
+
+
+svg {
+    height: 70px;
+    width: 70px;
+}
+
+div.container {
+    display:grid;
+    grid-template-columns: 70px 70px 70px 70px; 
+    grid-gap: 70px;
+}
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+}
+  
