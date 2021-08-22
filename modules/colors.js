@@ -6,8 +6,8 @@ const colorDefinitions = [
         outerColor: 'pink'
     }],
     [{
-        innerColor: 'yellow',
-        outerColor: 'purple'
+        innerColor: 'blue',
+        outerColor: 'gray'
     }],
 ];
 

@@ -17,22 +17,26 @@ function prepareScreens() {
 
 }
 
-// TODO rework this
+// TODO rework this, can be infinite loop
 function createPauseStep() {
     const experimentByColor = experimentResult[colorIndex];
+    experimentByColor.colors = colorDefinitions[colorIndex]
+    if (!experimentByColor.steps) {
+        experimentByColor.steps = []
+    }
+
     let foundNextPauseButton = false;
     let randomIndex;
     while (!foundNextPauseButton) {
+        console.log('LOOOOOOOOOOOOOOOOOOOOOOOOOOOP')
         randomIndex = getNumberBetween(0, svgArray.length)
 
         if (!svgArray[randomIndex].wasPauseButton) {
-            experimentByColor.steps = [];
-            experimentByColor.steps[shapeCounter] = {};
+            experimentByColor.steps.push({});
 
             experimentByColor
                 .steps[shapeCounter]
                 .svgInfo = svgArray[randomIndex]
-            experimentByColor.colors = colorDefinitions[colorIndex]
             foundNextPauseButton = true
             svgArray[randomIndex].wasPauseButton = true
         }
@@ -40,14 +44,19 @@ function createPauseStep() {
 
 
     const pauseStepContainer = document.querySelector('.pauseStep');
-    pauseStepContainer.innerHTML = setUpColorsForSvg(
+    const svg = document.createElement('div');
+    svg.innerHTML = setUpColorsForSvg(
         experimentByColor
             .steps[shapeCounter]
             .svgInfo.svgContent
     )
+    pauseStepContainer.appendChild(svg)
+
     setPauseStepVisibility('block')
     setTimeout(() => {
         setPauseStepVisibility('none')
+        const pauseStepContainer = document.querySelector('.pauseStep');
+        pauseStepContainer.innerHTML = ''
         createGridStep();
         setGridVisibility('grid')
         startGridTimmer();
@@ -83,16 +92,28 @@ function createGridStep() {
                 setGridVisibility('none')
 
                 shapeThatWeAreLookingFor.timeSpentOnScreen = calcTimeDifference(shapeThatWeAreLookingFor.startTimeOnGrid)
-
-                shapeCounter = shapeCounter + 1;
-                if (shapeCounter > svgArray.length) {
-                    console.log('by bruh');
-                    return;
-                }
-                createPauseStep(svgArray)
-                setPauseStepVisibility('block')
+                delete shapeThatWeAreLookingFor.startTimeOnGrid
 
                 console.log('experiment > ', experimentResult)
+                shapeCounter = shapeCounter + 1;
+                if (shapeCounter >= svgArray.length) {
+                    experimentResult.push({});
+                    colorIndex = colorIndex + 1;
+                    debugger;
+                    shapeCounter = 0;
+
+                    for(let svg of svgArray) {
+                        svg.wasPauseButton = false
+                    }
+                }
+                
+                if (colorIndex >= colorDefinitions.length) {
+                    console.log('by bruh');
+                }
+
+            
+                createPauseStep()
+                setPauseStepVisibility('block')
             } else {
                 console.log('WRONG')
                 if (isNaN(shapeThatWeAreLookingFor.missClicks)) {
@@ -114,9 +135,18 @@ function setUpColorsForSvg(svgContent) {
     const startStyleTag = svgContent.indexOf('<style')
     const endStyleTag = svgContent.indexOf('</style>')
     // TODO make this nicer, its horrible
-    return svgContent.substring(0, startStyleTag) +
-        `<style>.cls-1{fill:${experimentByColor.colors[0].innerColor};}.cls-2{fill:${experimentByColor.colors[0].outerColor};}</style>`
-        + svgContent.substring(endStyleTag, svgContent.length);
+    console.log(experimentByColor.colors[0].innerColor)
+    console.log(experimentByColor.colors[0].outerColor)
+
+
+    const partialResult = svgContent.substring(0, startStyleTag) +
+    `<style>.cls-1{fill:${experimentByColor.colors[0].innerColor};}.cls-2{fill:${experimentByColor.colors[0].outerColor};}</style>`
+    + svgContent.substring(endStyleTag, svgContent.length);
+
+    const idTag = svgContent.replace('id=', 'random=')
+    const endStyleTag = svgContent.indexOf('</style>')
+
+    return 
 }
 
 function setPauseStepVisibility(visibility) {
