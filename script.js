@@ -144,7 +144,7 @@ function setUpColorsForSvg(svgContent) {
     + svgContent.substring(endStyleTag, svgContent.length);
 
     const idTag = svgContent.replace('id=', 'random=')
-    const endStyleTag = svgContent.indexOf('</style>')
+    
 
     return 
 }
