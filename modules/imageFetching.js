@@ -8,7 +8,7 @@ async function fetchSvgFiles() {
         const name = `${i}.svg`;
         fileNames.push(name);
         images.push(
-            fetch('/' + name)
+            fetch('/modules/' + name)
                 .then(response => response.text())
         )
     }
