@@ -5,7 +5,7 @@ async function fetchSvgFiles() {
     const fileNames = []
     let images = []
     for (let i = 18; i < 22; i++) {
-        const name = `1-${i}.svg`;
+        const name = `${i}.svg`;
         fileNames.push(name);
         images.push(
             fetch('/assets/' + name)
