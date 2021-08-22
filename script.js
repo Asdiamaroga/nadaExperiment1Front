@@ -13,7 +13,7 @@ function prepareScreens() {
 
     experimentResult.push({});
 
-    createPauseStep(svgArray);
+    createPauseStep();
 
 }
 
@@ -44,19 +44,15 @@ function createPauseStep() {
 
 
     const pauseStepContainer = document.querySelector('.pauseStep');
-    const svg = document.createElement('div');
-    svg.innerHTML = setUpColorsForSvg(
+    pauseStepContainer.innerHTML = setUpColorsForSvg(
         experimentByColor
             .steps[shapeCounter]
             .svgInfo.svgContent
     )
-    pauseStepContainer.appendChild(svg)
 
     setPauseStepVisibility('block')
     setTimeout(() => {
         setPauseStepVisibility('none')
-        const pauseStepContainer = document.querySelector('.pauseStep');
-        pauseStepContainer.innerHTML = ''
         createGridStep();
         setGridVisibility('grid')
         startGridTimmer();
@@ -102,16 +98,18 @@ function createGridStep() {
                     debugger;
                     shapeCounter = 0;
 
-                    for(let svg of svgArray) {
+                    for (let svg of svgArray) {
                         svg.wasPauseButton = false
                     }
                 }
-                
+
                 if (colorIndex >= colorDefinitions.length) {
                     console.log('by bruh');
+                    // TODO. probably thank you or smth
+                    return;
                 }
 
-            
+
                 createPauseStep()
                 setPauseStepVisibility('block')
             } else {
@@ -140,10 +138,11 @@ function setUpColorsForSvg(svgContent) {
 
 
     const partialResult = svgContent.substring(0, startStyleTag) +
-    `<style>.cls-1{fill:${experimentByColor.colors[0].innerColor};}.cls-2{fill:${experimentByColor.colors[0].outerColor};}</style>`
-    + svgContent.substring(endStyleTag, svgContent.length);
+        svgContent.substring(endStyleTag, svgContent.length);
 
-    return partialResult.replace('id=', 'random=')
+    return partialResult
+        .replace('fill="#ff8080"', `fill="${experimentByColor.colors[0].outerColor}"`)
+        .replace('fill="red"', `fill="${experimentByColor.colors[0].innerColor}"`)
 }
 
 function setPauseStepVisibility(visibility) {
