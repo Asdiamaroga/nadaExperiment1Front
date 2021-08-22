@@ -26,5 +26,9 @@ function shuffleSomeMore(array) {
     return array;
 }
 
+function getNumberBetween(min, max) {
+	return Math.floor(Math.random() * (max - min) + min);
+}
 
-export {shuffleArray}
+
+export {shuffleArray, getNumberBetween}

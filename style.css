@@ -6,7 +6,7 @@ svg {
 }
 
 div.container {
-    display:grid;
+    display: none;
     grid-template-columns: 70px 70px 70px 70px; 
     grid-gap: 70px;
 }
@@ -19,3 +19,7 @@ div.container {
     transform: translate(-50%, -50%);
 }
   
+
+.pauseStep {
+    display: none;
+}
