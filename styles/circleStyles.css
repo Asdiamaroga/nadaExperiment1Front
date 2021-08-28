@@ -1,10 +1,4 @@
-.circle {
-    width:2em;
-    height:2em;
-    border-radius:50%;
-    background-color:orange;
-    background-image: '/assets/arrow.jpg';
-}
+
 .circle-container {
     display: none;
     position: relative;

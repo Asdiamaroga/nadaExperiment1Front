@@ -36,7 +36,7 @@ function getElement(currentAngle, distanceFromTheCenterOfTheCircle) {
     circleElement.classList=['circle']
     circleElement.style = "transform: rotate(" + currentAngle + "deg)" +
                           "translate(24em)" + 
-                          "rotate(-" + Math.random()*360 + "deg);"
+                          "rotate(-" + currentAngle + "deg);"
 
     return circleElement;
 

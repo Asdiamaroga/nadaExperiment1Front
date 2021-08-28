@@ -1,15 +1,15 @@
 import { startTheCircleTest } from './experiments/circle.js'
 import { startShapesExperiment } from './experiments/shapes.js'
 
-const EXPERIMENT_TYPE = {
+const EXPERIMENT = {
     CIRCLE: 'CIRCLE',
     SHAPE: 'SHAPE'
 }
 
 function startExpepriment(type, colors) {
-    if (type === EXPERIMENT_TYPE.CIRCLE) {
+    if (type === EXPERIMENT.CIRCLE) {
         startTheCircleTest(colors)
-    } else if (type === EXPERIMENT_TYPE.SHAPE) {
+    } else if (type === EXPERIMENT.SHAPE) {
         startShapesExperiment()
     }
 }
@@ -35,7 +35,7 @@ function setUpExperimentOptionsScreen() {
     createExpeprimentButton(
         experimentOptionsContainer,
         'A',
-        EXPERIMENT_TYPE.CIRCLE,
+        EXPERIMENT.CIRCLE,
         'A'
     )
     createExpeprimentButton(experimentOptionsContainer, 'S', 'A', 'A')
