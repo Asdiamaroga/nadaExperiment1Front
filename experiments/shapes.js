@@ -1,6 +1,6 @@
-import { colorDefinitions } from '../modules/colors.js'
+import { colorDefinitions } from './modules/colors.js'
 import { shuffleArray, getNumberBetween } from '../utils/arrayUtils.js'
-import { fetchSvgFiles } from '../modules/imageFetching.js'
+import { fetchSvgFiles } from './modules/imageFetching.js'
 import { calcTimeDifference } from '../utils/timeUtils.js'
 
 let colorIndex = 0;

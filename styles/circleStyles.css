@@ -15,7 +15,7 @@
     border-radius: 50%;
     margin: 1.75em auto 0;
 }
-.circle-container img {
+.circle-container div {
     display: block;
     overflow: hidden;
     position: absolute;
@@ -23,7 +23,7 @@
     left: 50%;
     width: 4em;
     height: 4em;
-    margin: -2em;
+    /* margin: -2em; */
     /* 2em = 4em/2 */
     /* half the width */
 }
