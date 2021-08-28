@@ -1,5 +1,7 @@
 export const name = 'imageFetching';
 
+// TODO copy the SVG content into a JS file, aint got no time for this now
+
 
 async function fetchSvgFiles() {
     const fileNames = []
