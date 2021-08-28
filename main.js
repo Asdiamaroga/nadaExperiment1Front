@@ -1,5 +1,5 @@
-import { startTheCircleTest } from './circle.js'
-import { startShapesExperiment } from './shapes.js'
+import { startTheCircleTest } from './experiments/circle.js'
+import { startShapesExperiment } from './experiments/shapes.js'
 
 const EXPERIMENT_TYPE = {
     CIRCLE: 'CIRCLE',

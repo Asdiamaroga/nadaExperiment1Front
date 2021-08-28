@@ -4,16 +4,19 @@ const NUMBER_OF_IMAGES = 12;
 
 
 
-
-
-
-
 function startTheCircleTest(colors) {
-    console.log('testing');
+    showContainer()
+    setUpCircle()
+}
+
+function showContainer() {
     const container = document.querySelector(".circle-container");
     container.style.display='block'
-    let degreeAngle = 360 / NUMBER_OF_IMAGES;
+}
 
+function setUpCircle() {
+    const container = document.querySelector(".circle-container");
+    let degreeAngle = 360 / NUMBER_OF_IMAGES;
     let currentAngle = 0;
 
     let containerContent = '';
@@ -27,7 +30,6 @@ function startTheCircleTest(colors) {
     container.innerHTML = containerContent;
 }
 
-
 function getDiv(currentAngle, distanceFromTheCenterOfTheCircle) {
     const style = "style='transform: rotate(" + currentAngle + "deg)" +
     "translate(24em) rotate(-" + Math.random()*360 + "deg); opacity:0.8;'"
@@ -36,15 +38,6 @@ function getDiv(currentAngle, distanceFromTheCenterOfTheCircle) {
     style + ">"
     + "</img>";
 
-}
-
-function getWindowMesurements() {
-
-
-    return {
-        height: 10,
-        width: 10
-    }
 }
 
 export const name = 'circlesExperiment'
