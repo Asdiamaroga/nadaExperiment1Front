@@ -23,3 +23,18 @@ div.container {
 .pauseStep {
     display: none;
 }
+
+
+.experiments {
+    display: grid;
+    grid-template-columns: 70px 70px 70px 70px; 
+    grid-gap: 70px;
+}
+
+.experimentButton {
+    border: 0px;
+    height: 70px;
+    width: 70px;
+    font-size: 25px;
+
+}

@@ -1,7 +1,7 @@
 import { colorDefinitions } from './modules/colors.js'
-import { shuffleArray, getNumberBetween } from './modules/arrayUtils.js'
+import { shuffleArray, getNumberBetween } from './utils/arrayUtils.js'
 import { fetchSvgFiles } from './modules/imageFetching.js'
-import { calcTimeDifference } from './modules/timeUtils.js'
+import { calcTimeDifference } from './utils/timeUtils.js'
 
 let colorIndex = 0;
 let shapeCounter = 0;
@@ -156,7 +156,7 @@ function setGridVisibility(visibility) {
 }
 
 
-async function start() {
+async function startShapesExperiment() {
     svgArray = shuffleArray(
         await fetchSvgFiles()
     )
@@ -168,4 +168,5 @@ async function start() {
     // console.log(colorDefinitions)
 }
 
-start()
+export const name = 'shapesExperiment'
+export { startShapesExperiment }
