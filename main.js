@@ -6,9 +6,9 @@ const EXPERIMENT = {
     SHAPE: 'SHAPE'
 }
 
-function startExpepriment(type, colors) {
+function startExpepriment(type, colors, text) {
     if (type === EXPERIMENT.CIRCLE) {
-        startTheCircleTest(colors)
+        startTheCircleTest(text)
     } else if (type === EXPERIMENT.SHAPE) {
         startShapesExperiment()
     }
@@ -22,7 +22,7 @@ function createExpeprimentButton(parrent, text, type, colors) {
     experiment.onclick = (event) => {
         const experiment = document.querySelector('.experiments');
         experiment.style.display = 'none'
-        startExpepriment(type, colors)
+        startExpepriment(type, colors, text)
     }
 
     parrent.appendChild(experiment)

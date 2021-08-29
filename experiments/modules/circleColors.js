@@ -1,33 +1,73 @@
 export const name = 'circleColors'
 
 
-noBorders = [
-    [
-        {
-            phone: '',
-            filler: ''
-        },
-        {
-            phone: '',
-            filler: ''
-        },
-        {
-            phone: '',
-            filler: ''
-        },
-        {
-            phone: '',
-            filler: ''
-        },
-        {
-            phone: '',
-            filler: ''
-        },
-        {
-            phone: '',
-            filler: ''
-        }
-    ]
-]
+const noBorders = {
+    'A': [
+        [
+            {
+                phone: '#FF7F00',
+                filler: '#FF0000'
+            },
+            {
+                phone: '#FF0000',
+                filler: '#FF7F00'
+            },
 
-withBorders = []
+
+            {
+                phone: '#FF00AC',
+                filler: '#FF0000'
+            },
+            {
+                phone: '#FF0000',
+                filler: '#FF00AC'
+            },
+
+
+            {
+                phone: '#FF00AC',
+                filler: '#FF7F00'
+            },
+            {
+                phone: '#FF7F00',
+                filler: '#FF00AC'
+            }
+        ],
+
+
+        
+        [
+            {
+                phone: 'B8FF00',
+                filler: '00FF00'
+            },
+            {
+                phone: '00CFFF',
+                filler: '00FF00'
+            },
+            {
+                phone: '00CFFF',
+                filler: 'B8FF00'
+            }
+        ],
+        [
+            {
+                phone: '7E00FF',
+                filler: '00ACFF'
+            },
+            {
+                phone: '00ACFF',
+                filler: '0000FF'
+            },
+            {
+                phone: '0000FF',
+                filler: '00ACFF'
+            }
+        ]
+    ]
+}
+
+const withBorders = []
+
+
+export { noBorders }
