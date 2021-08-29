@@ -147,7 +147,10 @@ function createImageWithColors(currentAngle, index) {
                 indexOfSteps = 0;
                 indexOfColorCombination += 1
                 experimentResults.push([])
-                // createPauseStep()
+                for(let i = 0; i < toBeSelectedImages.length; i++) {
+                    toBeSelectedImages[i].wasSelected = false
+                }
+                createPauseStep()
             } else if (indexOfColorCombination === 4){
                 setCircleContainerVisibility('none')
                 setEnd('block')
