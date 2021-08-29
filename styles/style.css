@@ -38,3 +38,8 @@ div.container {
     font-size: 25px;
 
 }
+
+
+.end {
+    display: none;
+}

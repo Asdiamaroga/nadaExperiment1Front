@@ -1,5 +1,7 @@
 import { noBorderImages } from './modules/circleImages.js'
 import { noBorders } from './modules/circleColors.js'
+import { getNumberBetween } from '../utils/arrayUtils.js'
+
 
 const NUMBER_OF_IMAGES = 12;
 const experimentResults = []
@@ -47,12 +49,67 @@ function showContainer() {
 }
 
 function setUpExperiment() {
-    experimentResults.push({})
-    
-    
+    experimentResults.push([])
+
+    createPauseStep()
+}
+
+function createPauseStep() {
+    let found = false;
+    // TODO super bad, rework
+    let index = getNumberBetween(0, 5);
+    while (!found) {
+        if (!toBeSelectedImages[index].wasSelected) {
+
+            const experimentByColorCombo = experimentResults[indexOfColorCombination]
+            experimentByColorCombo.push({})
+            const experimentByStep = experimentByColorCombo[indexOfSteps]
+
+            experimentByStep.image = toBeSelectedImages[index].name
+            experimentByStep.color = noBorders[text][indexOfColorCombination][index]
+            experimentByStep.startTime = new Date()
+            found = true;
+            toBeSelectedImages[index].wasSelected = true
+        } else {
+            index = (index + 1) % 6
+        }
+    }
+
+    const pauseStep = document.querySelector('.pauseStep')
+    pauseStep.innerHTML = ''
+
+    const pauseButton = createImageWithColors(0, index);
+    pauseButton.style = ''
+    pauseButton.classList = ['centered']
+    pauseButton.onclick = () => {}
+    pauseButton.innerHTML = pauseButton.innerHTML.replace('viewBox="0 0 60 60"', '') // I don't care, I don't have time for this
+
+    setPauseStepVisibility('block')
+    setCircleContainerVisibility('none')
+    setTimeout(()=> {
+        setPauseStepVisibility('none')
+        setUpCircles()
+        setCircleContainerVisibility('block')
+    }, 2000)
 
 
-    setUpCircles()
+    pauseStep.appendChild(pauseButton)
+
+}
+
+function setPauseStepVisibility(visibility) {
+    const pauseStepContainer = document.querySelector('.pauseStep');
+    pauseStepContainer.style.display = visibility
+}
+
+function setCircleContainerVisibility(visibility) {
+    const grid = document.querySelector('.circle-container');
+    grid.style.display = visibility
+}
+
+function setEnd(visibility) {
+    const grid = document.querySelector('.end');
+    grid.style.display = visibility
 }
 
 function setUpCircles() {
@@ -79,7 +136,32 @@ function createImageWithColors(currentAngle, index) {
         index
     )
 
+    circleElement.onclick = () => {
+        const experimentByColorCombo = experimentResults[indexOfColorCombination]    
+        const experimentByStep = experimentByColorCombo[indexOfSteps]
 
+        if(noBorderImages[index].name === experimentByStep.image) {
+            console.log('correct')
+            indexOfSteps = indexOfSteps + 1
+            if (indexOfSteps === 6) {
+                setCircleContainerVisibility('none')
+                setEnd('block')
+            } else {
+                createPauseStep()
+            }
+            
+        } else {
+            console.log('WRONG')
+            if (isNaN(experimentByStep.mistakes)) {
+                experimentByStep.mistakes = 1
+            } else {
+                experimentByStep.mistakes += 1
+            }
+            
+        }
+
+        console.log(experimentResults)
+    }
 
 
 
