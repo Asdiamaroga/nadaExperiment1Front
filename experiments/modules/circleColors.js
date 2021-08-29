@@ -35,21 +35,37 @@ const noBorders = {
         ],
 
 
-        
+
         [
             {
                 phone: 'B8FF00',
                 filler: '00FF00'
             },
             {
+                phone: '00FF00',
+                filler: 'B8FF00'
+            },
+
+            {
                 phone: '00CFFF',
                 filler: '00FF00'
             },
             {
+                phone: '00FF00',
+                filler: '00CFFF'
+            },
+
+            {
                 phone: '00CFFF',
                 filler: 'B8FF00'
+            },
+            {
+                phone: 'B8FF00',
+                filler: '00CFFF'
             }
         ],
+
+
         [
             {
                 phone: '7E00FF',
@@ -57,11 +73,27 @@ const noBorders = {
             },
             {
                 phone: '00ACFF',
+                filler: '7E00FF'
+            },
+
+
+            {
+                phone: '00ACFF',
                 filler: '0000FF'
             },
             {
                 phone: '0000FF',
                 filler: '00ACFF'
+            },
+
+
+            {
+                phone: '0000FF',
+                filler: '00ACFF'
+            },
+            {
+                phone: '00ACFF',
+                filler: '0000FF'
             }
         ]
     ]
