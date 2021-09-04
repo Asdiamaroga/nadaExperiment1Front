@@ -10,7 +10,7 @@ function startExpepriment(type, colors, text) {
     if (type === EXPERIMENT.CIRCLE) {
         startTheCircleTest(text)
     } else if (type === EXPERIMENT.SHAPE) {
-        startShapesExperiment()
+        startShapesExperiment(text)
     }
 }
 
@@ -52,7 +52,7 @@ function setUpExperimentOptionsScreen() {
         EXPERIMENT.CIRCLE,
         'A')
 
-        
+
     createExpeprimentButton(experimentOptionsContainer, 'BY', EXPERIMENT.SHAPE, 'A')
     createExpeprimentButton(experimentOptionsContainer, 'BG', 'A', 'A')
     createExpeprimentButton(experimentOptionsContainer, 'BM', 'A', 'A')

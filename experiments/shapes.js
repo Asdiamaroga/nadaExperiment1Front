@@ -10,18 +10,18 @@ let shapeCounter = 0;
 const experimentResult = [];
 let svgArray;
 
-function prepareScreens() {
+function prepareScreens(experiment) {
 
     experimentResult.push({});
 
-    createPauseStep();
+    createPauseStep(experiment);
 
 }
 
 // TODO rework this, can be infinite loop
-function createPauseStep() {
+function createPauseStep(experiment) {
     const experimentByColor = experimentResult[colorIndex];
-    experimentByColor.colors = colorDefinitions[colorIndex]
+    experimentByColor.colors = colorDefinitions[experiment]
     if (!experimentByColor.steps) {
         experimentByColor.steps = []
     }
@@ -98,14 +98,17 @@ function createGridStep() {
                 console.log('experiment > ', experimentResult)
                 shapeCounter = shapeCounter + 1;
                 if (shapeCounter >= svgArray.length) {
-                    experimentResult.push({});
-                    colorIndex = colorIndex + 1;
-                    debugger;
-                    shapeCounter = 0;
+                    // experimentResult.push({});
+                    // colorIndex = colorIndex + 1;
+                    // debugger;
+                    // shapeCounter = 0;
 
-                    for (let svg of svgArray) {
-                        svg.wasPauseButton = false
-                    }
+                    // for (let svg of svgArray) {
+                    //     svg.wasPauseButton = false
+                    // }
+
+                    console.log('by bruh');
+                    return;
                 }
 
                 if (colorIndex >= colorDefinitions.length) {
@@ -145,8 +148,8 @@ function setUpColorsForSvg(svgContent) {
     const startStyleTag = svgContent.indexOf('<style')
     const endStyleTag = svgContent.indexOf('</style>')
     // TODO make this nicer, its horrible
-    console.log(experimentByColor.colors[0].innerColor)
-    console.log(experimentByColor.colors[0].outerColor)
+    console.log(experimentByColor.colors.innerColor)
+    console.log(experimentByColor.colors.outerColor)
 
 
     const partialResult = svgContent.substring(0, startStyleTag) +
@@ -154,8 +157,8 @@ function setUpColorsForSvg(svgContent) {
 
 
     return partialResult
-        .replace('fill="#inner"', `fill="${experimentByColor.colors[0].innerColor}"`)
-        .replace('fill="#outer"', `fill="${experimentByColor.colors[0].outerColor}"`)
+        .replace('fill="#inner"', `fill="${experimentByColor.colors.innerColor}"`)
+        .replace('fill="#outer"', `fill="${experimentByColor.colors.outerColor}"`)
         .replace('0 0 60 60', '')
 }
 
@@ -170,10 +173,10 @@ function setGridVisibility(visibility) {
 }
 
 
-async function startShapesExperiment() {
+async function startShapesExperiment(experiment) {
     svgArray = images
 
-    prepareScreens()
+    prepareScreens(experiment)
 
     // injectSVG(svgImages)
 
