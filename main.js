@@ -38,13 +38,27 @@ function setUpExperimentOptionsScreen() {
         EXPERIMENT.CIRCLE,
         'A'
     )
-    createExpeprimentButton(experimentOptionsContainer, 'S', 'A', 'A')
-    createExpeprimentButton(experimentOptionsContainer, 'Ao', 'A', 'A')
-    createExpeprimentButton(experimentOptionsContainer, 'So', 'A', 'A')
-    createExpeprimentButton(experimentOptionsContainer, 'RGp', 'A', 'A')
-    createExpeprimentButton(experimentOptionsContainer, 'BKp', 'A', 'A')
-    createExpeprimentButton(experimentOptionsContainer, 'RGn', 'A', 'A')
-    createExpeprimentButton(experimentOptionsContainer, 'BKn', 'A', 'A')
+    createExpeprimentButton(experimentOptionsContainer,
+        'S',
+        EXPERIMENT.CIRCLE,
+        'A')
+
+    createExpeprimentButton(experimentOptionsContainer,
+        'Ao',
+        EXPERIMENT.CIRCLE,
+        'A')
+    createExpeprimentButton(experimentOptionsContainer,
+        'So',
+        EXPERIMENT.CIRCLE,
+        'A')
+
+        
+    createExpeprimentButton(experimentOptionsContainer, 'BY', EXPERIMENT.SHAPE, 'A')
+    createExpeprimentButton(experimentOptionsContainer, 'BG', 'A', 'A')
+    createExpeprimentButton(experimentOptionsContainer, 'BM', 'A', 'A')
+    createExpeprimentButton(experimentOptionsContainer, 'YG', 'A', 'A')
+    createExpeprimentButton(experimentOptionsContainer, 'YM', 'A', 'A')
+    createExpeprimentButton(experimentOptionsContainer, 'GM', 'A', 'A')
 
 }
 

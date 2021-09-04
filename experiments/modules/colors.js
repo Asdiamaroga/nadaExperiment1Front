@@ -2,8 +2,8 @@ export const name = 'colors';
 
 const colorDefinitions = [
     [{
-        innerColor: 'green',
-        outerColor: 'pink'
+        innerColor: '#4747FF',
+        outerColor: '#C2C200'
     }],
     [{
         innerColor: 'blue',

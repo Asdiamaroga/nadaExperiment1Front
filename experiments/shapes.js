@@ -2,12 +2,13 @@ import { colorDefinitions } from './modules/colors.js'
 import { shuffleArray, getNumberBetween } from '../utils/arrayUtils.js'
 import { fetchSvgFiles } from './modules/imageFetching.js'
 import { calcTimeDifference } from '../utils/timeUtils.js'
+import { images } from './modules/shapesImages.js'
 
+const NUMBER_OF_IMAGES = 18;
 let colorIndex = 0;
 let shapeCounter = 0;
 const experimentResult = [];
 let svgArray;
-
 
 function prepareScreens() {
 
@@ -26,10 +27,10 @@ function createPauseStep() {
     }
 
     let foundNextPauseButton = false;
-    let randomIndex;
+    let randomIndex = getNumberBetween(0, svgArray.length)
     while (!foundNextPauseButton) {
         console.log('LOOOOOOOOOOOOOOOOOOOOOOOOOOOP')
-        randomIndex = getNumberBetween(0, svgArray.length)
+
 
         if (!svgArray[randomIndex].wasPauseButton) {
             experimentByColor.steps.push({});
@@ -39,6 +40,8 @@ function createPauseStep() {
                 .svgInfo = svgArray[randomIndex]
             foundNextPauseButton = true
             svgArray[randomIndex].wasPauseButton = true
+        } else {
+            randomIndex = (randomIndex + 1) % svgArray.length;
         }
     }
 
@@ -47,7 +50,7 @@ function createPauseStep() {
     pauseStepContainer.innerHTML = setUpColorsForSvg(
         experimentByColor
             .steps[shapeCounter]
-            .svgInfo.svgContent
+            .svgInfo.content
     )
 
     setPauseStepVisibility('block')
@@ -60,7 +63,7 @@ function createPauseStep() {
 
     console.log('fileName > ', experimentByColor
         .steps[shapeCounter]
-        .svgInfo.fileName
+        .svgInfo.name
     )
 }
 
@@ -73,15 +76,17 @@ function startGridTimmer() {
 function createGridStep() {
     const container = document.querySelector(".container");
     container.innerHTML = ''
-    svgArray = shuffleArray(svgArray)
+
+    let newButtons = []
+    // svgArray = shuffleArray(svgArray)
     for (const index in svgArray) {
-        // container.innerHTML = container.innerHTML + svgArray[index].svgContent
+        // container.innerHTML = container.innerHTML + svgArray[index].content
         const svg = document.createElement('div');
-        svg.innerHTML = setUpColorsForSvg(svgArray[index].svgContent)
+        svg.innerHTML = setUpColorsForSvg(svgArray[index].content)
         svg.onclick = () => {
             const experimentByColor = experimentResult[colorIndex];
             const shapeThatWeAreLookingFor = experimentByColor.steps[shapeCounter];
-            const shapeFound = svgArray[index].fileName === shapeThatWeAreLookingFor.svgInfo.fileName;
+            const shapeFound = svgArray[index].name === shapeThatWeAreLookingFor.svgInfo.name;
 
             if (shapeFound) {
                 console.log('found it ')
@@ -122,7 +127,14 @@ function createGridStep() {
             }
         }
 
-        container.appendChild(svg)
+        newButtons.push(svg)
+        // container.appendChild(svg)
+    }
+
+    // TODO return
+    // newButtons = shuffleArray(newButtons)
+    for (const button of newButtons) {
+        container.appendChild(button)
     }
 }
 
@@ -140,9 +152,11 @@ function setUpColorsForSvg(svgContent) {
     const partialResult = svgContent.substring(0, startStyleTag) +
         svgContent.substring(endStyleTag, svgContent.length);
 
+
     return partialResult
-        .replace('fill="#ff8080"', `fill="${experimentByColor.colors[0].outerColor}"`)
-        .replace('fill="red"', `fill="${experimentByColor.colors[0].innerColor}"`)
+        .replace('fill="#inner"', `fill="${experimentByColor.colors[0].innerColor}"`)
+        .replace('fill="#outer"', `fill="${experimentByColor.colors[0].outerColor}"`)
+        .replace('0 0 60 60', '')
 }
 
 function setPauseStepVisibility(visibility) {
@@ -157,9 +171,7 @@ function setGridVisibility(visibility) {
 
 
 async function startShapesExperiment() {
-    svgArray = shuffleArray(
-        await fetchSvgFiles()
-    )
+    svgArray = images
 
     prepareScreens()
 
