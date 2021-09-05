@@ -1,20 +1,20 @@
 import { colorDefinitions } from './modules/colors.js'
 import { shuffleArray, getNumberBetween } from '../utils/arrayUtils.js'
-import { fetchSvgFiles } from './modules/imageFetching.js'
 import { calcTimeDifference } from '../utils/timeUtils.js'
 import { images } from './modules/shapesImages.js'
 
-const NUMBER_OF_IMAGES = 18;
+const NUMBER_OF_IMAGES = 4;
 let colorIndex = 0;
 let shapeCounter = 0;
 const experimentResult = [];
 let svgArray;
+let experimentName;
 
 function prepareScreens(experiment) {
 
     experimentResult.push({});
-
-    createPauseStep(experiment);
+    experimentName = experiment
+    createPauseStep(experimentName);
 
 }
 
@@ -56,7 +56,7 @@ function createPauseStep(experiment) {
     setPauseStepVisibility('block')
     setTimeout(() => {
         setPauseStepVisibility('none')
-        createGridStep();
+        setUpCircle();
         setGridVisibility('grid')
         startGridTimmer();
     }, 2000)
@@ -73,16 +73,20 @@ function startGridTimmer() {
     shapeThatWeAreLookingFor.startTimeOnGrid = new Date();
 }
 
-function createGridStep() {
-    const container = document.querySelector(".container");
+function setUpCircle() {
+    const container = document.querySelector(".circle-container");
     container.innerHTML = ''
 
+    let degreeAngle = 360 / svgArray.length;
+    let currentAngle = 0;
     let newButtons = []
     // svgArray = shuffleArray(svgArray)
     for (const index in svgArray) {
         // container.innerHTML = container.innerHTML + svgArray[index].content
         const svg = document.createElement('div');
         svg.innerHTML = setUpColorsForSvg(svgArray[index].content)
+
+
         svg.onclick = () => {
             const experimentByColor = experimentResult[colorIndex];
             const shapeThatWeAreLookingFor = experimentByColor.steps[shapeCounter];
@@ -118,7 +122,7 @@ function createGridStep() {
                 }
 
 
-                createPauseStep()
+                createPauseStep(experimentName)
                 setPauseStepVisibility('block')
             } else {
                 console.log('WRONG')
@@ -130,12 +134,18 @@ function createGridStep() {
             }
         }
 
+        svg.classList = ['circle']
+        svg.style = "transform: rotate(" + currentAngle + "deg)" +
+            "translate(24em)" +
+            "rotate(-" + currentAngle + "deg);"
+
+        currentAngle = currentAngle + degreeAngle;
         newButtons.push(svg)
         // container.appendChild(svg)
     }
 
     // TODO return
-    // newButtons = shuffleArray(newButtons)
+    newButtons = shuffleArray(newButtons)
     for (const button of newButtons) {
         container.appendChild(button)
     }
@@ -168,7 +178,7 @@ function setPauseStepVisibility(visibility) {
 }
 
 function setGridVisibility(visibility) {
-    const grid = document.querySelector('.container');
+    const grid = document.querySelector('.circle-container');
     grid.style.display = visibility
 }
 
