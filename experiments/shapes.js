@@ -59,7 +59,7 @@ function createPauseStep(experiment) {
         setUpCircle();
         setGridVisibility('grid')
         startGridTimmer();
-    }, 2000)
+    }, 3000)
 
     console.log('fileName > ', experimentByColor
         .steps[shapeCounter]
@@ -79,8 +79,8 @@ function setUpCircle() {
 
     let degreeAngle = 360 / svgArray.length;
     let currentAngle = 0;
-    let newButtons = []
-    // svgArray = shuffleArray(svgArray)
+    // let newButtons = shuffleArray[]
+    svgArray = shuffleArray(svgArray)
     for (const index in svgArray) {
         // container.innerHTML = container.innerHTML + svgArray[index].content
         const svg = document.createElement('div');
@@ -140,15 +140,15 @@ function setUpCircle() {
             "rotate(-" + currentAngle + "deg);"
 
         currentAngle = currentAngle + degreeAngle;
-        newButtons.push(svg)
-        // container.appendChild(svg)
+        // newButtons.push(svg)
+        container.appendChild(svg)
     }
 
     // TODO return
-    newButtons = shuffleArray(newButtons)
-    for (const button of newButtons) {
-        container.appendChild(button)
-    }
+    // newButtons = shuffleArray(newButtons)
+    // for (const button of newButtons) {
+    //     container.appendChild(button)
+    // }
 }
 
 
