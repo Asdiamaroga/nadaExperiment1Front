@@ -10,7 +10,35 @@ let indexOfSteps = 0;
 let text;
 
 // #lazy, i just cant
-const toBeSelectedImages = [
+let toBeSelectedImages;
+const toBeSelectedImagesNoBorders = [
+    {
+        name: 'bez okvira-43.svg',
+        wasSelected: false
+    },
+    {
+        name: 'bez okvira-44.svg',
+        wasSelected: false
+    },
+    {
+        name: 'bez okvira-47.svg',
+        wasSelected: false
+    },
+    {
+        name: 'bez okvira-48.svg',
+        wasSelected: false
+    },
+    {
+        name: 'bez okvira-51.svg',
+        wasSelected: false
+    },
+    {
+        name: 'bez okvira-52.svg',
+        wasSelected: false
+    },
+]
+
+const toBeSelectedImagesWithBorders = [
     {
         name: 'bez okvira-43.svg',
         wasSelected: false
@@ -39,6 +67,11 @@ const toBeSelectedImages = [
 
 function startTheCircleTest(textRecieved) {
     text = textRecieved
+    if (text == 'A' || text == 'S') {
+        toBeSelectedImages = toBeSelectedImagesNoBorders
+    } else {
+        toBeSelectedImages = toBeSelectedImagesWithBorders
+    }
     showContainer()
     setUpExperiment()
 }
