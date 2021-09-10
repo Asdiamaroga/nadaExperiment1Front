@@ -1,6 +1,7 @@
 import { noBorderImages, borderImages } from './modules/circleImages.js'
 import { noBorders } from './modules/circleColors.js'
 import { getNumberBetween, shuffleArray } from '../utils/arrayUtils.js'
+import { calcTimeDifference } from '../utils/timeUtils.js'
 
 
 const NUMBER_OF_IMAGES = 12;
@@ -195,9 +196,15 @@ function createImageWithColors(currentAngle, index) {
         if(imagesToShow[index].name === experimentByStep.image) {
             console.log('correct')
             indexOfSteps = indexOfSteps + 1
+
+
+            experimentByStep.timeSpentOnScreen = calcTimeDifference(experimentByStep.startTime)
+            delete experimentByStep.startTime
+
             if (indexOfSteps === 6) {
                 indexOfSteps = 0;
                 indexOfColorCombination += 1
+        
                 experimentResults.push([])
                 for(let i = 0; i < toBeSelectedImages.length; i++) {
                     toBeSelectedImages[i].wasSelected = false
