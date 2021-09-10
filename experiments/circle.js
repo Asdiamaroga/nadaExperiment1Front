@@ -253,7 +253,13 @@ function cleanUpSvgContent(svgContent) {
     const startStyleTag = svgContent.indexOf('<style')
     const endStyleTag = svgContent.indexOf('</style>')
 
-    return svgContent.substring(0, startStyleTag) + svgContent.substring(endStyleTag, svgContent.length)
+    const partialResult = svgContent.substring(0, startStyleTag) + svgContent.substring(endStyleTag, svgContent.length);
+    
+    const titleStart = partialResult.indexOf('<title>')
+    const titleEnd = partialResult.indexOf('</title>')
+
+    return partialResult.substring(0, titleStart) +
+    partialResult.substring(titleEnd, partialResult.length);
 }
 
 export const name = 'circlesExperiment'

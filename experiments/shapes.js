@@ -166,6 +166,7 @@ function setUpColorsForSvg(svgContent) {
 
     const startStyleTag = svgContent.indexOf('<style')
     const endStyleTag = svgContent.indexOf('</style>')
+    
     // TODO make this nicer, its horrible
     console.log(experimentByColor.colors.innerColor)
     console.log(experimentByColor.colors.outerColor)
@@ -174,6 +175,11 @@ function setUpColorsForSvg(svgContent) {
     const partialResult = svgContent.substring(0, startStyleTag) +
         svgContent.substring(endStyleTag, svgContent.length);
 
+    const titleStart = partialResult.indexOf('<title>')
+    const titleEnd = partialResult.indexOf('</title>')
+
+    partialResult = partialResult.substring(0, titleStart) +
+    partialResult.substring(titleEnd, partialResult.length);
 
     return partialResult
         .replace('fill="#inner"', `fill="${experimentByColor.colors.innerColor}"`)

@@ -36,10 +36,14 @@ div.container {
     height: 70px;
     width: 70px;
     font-size: 25px;
-
+    cursor: pointer;
 }
 
 
 .end {
     display: none;
+}
+
+.circle {
+    cursor: pointer;
 }
