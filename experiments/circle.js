@@ -1,4 +1,4 @@
-import { noBorderImages } from './modules/circleImages.js'
+import { noBorderImages, borderImages } from './modules/circleImages.js'
 import { noBorders } from './modules/circleColors.js'
 import { getNumberBetween } from '../utils/arrayUtils.js'
 
@@ -8,6 +8,7 @@ const experimentResults = []
 let indexOfColorCombination = 0;
 let indexOfSteps = 0;
 let text;
+let imagesToShow;
 
 // #lazy, i just cant
 let toBeSelectedImages;
@@ -40,27 +41,27 @@ const toBeSelectedImagesNoBorders = [
 
 const toBeSelectedImagesWithBorders = [
     {
-        name: 'bez okvira-43.svg',
+        name: 'sa_okvirom-55.svg',
         wasSelected: false
     },
     {
-        name: 'bez okvira-44.svg',
+        name: 'sa_okvirom-56.svg',
         wasSelected: false
     },
     {
-        name: 'bez okvira-47.svg',
+        name: 'sa_okvirom-59.svg',
         wasSelected: false
     },
     {
-        name: 'bez okvira-48.svg',
+        name: 'sa_okvirom-60.svg',
         wasSelected: false
     },
     {
-        name: 'bez okvira-51.svg',
+        name: 'sa_okvirom-63.svg',
         wasSelected: false
     },
     {
-        name: 'bez okvira-52.svg',
+        name: 'sa_okvirom-64.svg',
         wasSelected: false
     },
 ]
@@ -68,8 +69,10 @@ const toBeSelectedImagesWithBorders = [
 function startTheCircleTest(textRecieved) {
     text = textRecieved
     if (text == 'A' || text == 'S') {
+        imagesToShow = noBorderImages
         toBeSelectedImages = toBeSelectedImagesNoBorders
     } else {
+        imagesToShow = borderImages
         toBeSelectedImages = toBeSelectedImagesWithBorders
     }
     showContainer()
@@ -165,7 +168,7 @@ function setUpCircles() {
 function createImageWithColors(currentAngle, index) {
     const circleElement = document.createElement('div')
     circleElement.innerHTML = addColors(
-        cleanUpSvgContent(noBorderImages[index].content),
+        cleanUpSvgContent(imagesToShow[index].content),
         index
     )
 
@@ -173,7 +176,7 @@ function createImageWithColors(currentAngle, index) {
         const experimentByColorCombo = experimentResults[indexOfColorCombination]    
         const experimentByStep = experimentByColorCombo[indexOfSteps]
 
-        if(noBorderImages[index].name === experimentByStep.image) {
+        if(imagesToShow[index].name === experimentByStep.image) {
             console.log('correct')
             indexOfSteps = indexOfSteps + 1
             if (indexOfSteps === 6) {
@@ -222,8 +225,11 @@ function addColors(svgContent, index) {
     const currentIndex = index % 6
     const colorsToAdd = currentColorCombo[currentIndex]
     return svgContent
-        .replace('#box', colorsToAdd.filler)
-        .replace('#phone', colorsToAdd.phone)
+        .replace('fill="#box"', 'class="cls-1"')
+        .replace('fill="#phone"', 'class="cls-2"') // mistakes were made here
+        .replace('class="cls-1"', 'fill="' + colorsToAdd.filler + '"')
+        .replace('class="cls-2', 'fill="' + colorsToAdd.phone + '"')
+        .replace('class="cls-3', 'fill="' + colorsToAdd.border + '"')
 }
 
 function cleanUpSvgContent(svgContent) {
