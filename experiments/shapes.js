@@ -111,12 +111,16 @@ function setUpCircle() {
                     //     svg.wasPauseButton = false
                     // }
 
+                    setGridVisibility('none')
+                    setEnd('block')
                     console.log('by bruh');
                     return;
                 }
 
                 if (colorIndex >= colorDefinitions.length) {
                     console.log('by bruh');
+                    setGridVisibility('none')
+                    setEnd('block')
                     // TODO. probably thank you or smth
                     return;
                 }
@@ -149,6 +153,11 @@ function setUpCircle() {
     // for (const button of newButtons) {
     //     container.appendChild(button)
     // }
+}
+
+function setEnd(visibility) {
+    const grid = document.querySelector('.end');
+    grid.style.display = visibility
 }
 
 
