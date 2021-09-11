@@ -153,33 +153,18 @@ function setUpCircles() {
     const container = document.querySelector(".circle-container");
     container.innerHTML = ''
 
-
     let degreeAngle = 360 / NUMBER_OF_IMAGES;
     let currentAngle = 0;
 
     let buttons = []
     for (var index = 0; index < NUMBER_OF_IMAGES; index++) {
         /* add to the wrapper */
-        buttons.push(createImageWithColors(currentAngle, index))
-    }
-
-    buttons = shuffleArray(buttons)
-
-    for(let circleElement of buttons) {
-        circleElement.classList = ['circle']
-        circleElement.style = "transform: rotate(" + currentAngle + "deg)" +
-            "translate(24em)" +
-            "rotate(-" + currentAngle + "deg);"
-
-        container.appendChild(circleElement);
-
+        container.appendChild(
+            createImageWithColors(currentAngle, index)
+        );
+        /* increment the angle incrementer */
         currentAngle = currentAngle + degreeAngle;
     }
-    
-        /* increment the angle incrementer */
-        
-
-    
 }
 
 function createImageWithColors(currentAngle, index) {
@@ -229,6 +214,11 @@ function createImageWithColors(currentAngle, index) {
 
         console.log(experimentResults)
     }
+
+    circleElement.classList = ['circle']
+    circleElement.style = "transform: rotate(" + currentAngle + "deg)" +
+        "translate(24em)" +
+        "rotate(-" + currentAngle + "deg);"
 
 
     return circleElement;
