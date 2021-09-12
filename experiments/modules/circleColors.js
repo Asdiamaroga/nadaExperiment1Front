@@ -72,28 +72,28 @@ const noBorders = {
                 filler: '#00ACFF'
             },
             {
+                phone: '#7E00FF',
+                filler: '#0000FF'
+            },
+
+
+            {
+                phone: '#00ACFF',
+                filler: '#0000FF'
+            },
+            {
                 phone: '#00ACFF',
                 filler: '#7E00FF'
             },
 
 
             {
-                phone: '#00ACFF',
-                filler: '#0000FF'
-            },
-            {
-                phone: '#0000FF',
-                filler: '#00ACFF'
-            },
-
-
-            {
                 phone: '#0000FF',
                 filler: '#00ACFF'
             },
             {
-                phone: '#00ACFF',
-                filler: '#0000FF'
+                phone: '#0000FF',
+                filler: '#7E00FF'
             }
         ]
     ],
@@ -137,26 +137,26 @@ const noBorders = {
                 filler: '#00FF00'
             },
             {
+                phone: '#8000FF',
+                filler: '#FF0080'
+            },
+
+            {
+                phone: '#00FF00',
+                filler: '#FF0080'
+            },
+            {
                 phone: '#00FF00',
                 filler: '#8000FF'
             },
 
             {
-                phone: '#00FF00',
-                filler: '#FF0080'
-            },
-            {
-                phone: '#FF0080',
-                filler: '#00FF00'
-            },
-
-            {
                 phone: '#FF0080',
                 filler: '#00FF00'
             },
             {
-                phone: '#00FF00',
-                filler: '#FF0080'
+                phone: '#FF0080',
+                filler: '#8000FF'
             }
         ],
 
@@ -167,28 +167,28 @@ const noBorders = {
                 filler: '#80FF00'
             },
             {
+                phone: '#FF8000',
+                filler: '#0000FF'
+            },
+
+
+            {
+                phone: '#80FF00',
+                filler: '#0000FF'
+            },
+            {
                 phone: '#80FF00',
                 filler: '#FF8000'
             },
 
 
             {
-                phone: '#80FF00',
-                filler: '#0000FF'
-            },
-            {
                 phone: '#0000FF',
                 filler: '#80FF00'
             },
-
-
             {
                 phone: '#0000FF',
-                filler: '#0000FF'
-            },
-            {
-                phone: '#0000FF',
-                filler: '#0000FF'
+                filler: '#FF8000'
             }
         ]
     ],

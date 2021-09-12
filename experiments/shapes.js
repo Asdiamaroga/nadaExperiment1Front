@@ -114,6 +114,27 @@ function setUpCircle() {
                     setGridVisibility('none')
                     setEnd('block')
                     console.log('by bruh');
+
+                    let payload = {
+                        experimentName: experimentName,
+                        shapeColors: experimentResult[0].colors,
+                        steps: experimentResult[0].steps,
+                    }
+
+                    for(let i = 0; i < payload.steps.length; i ++ ) {
+                        payload.steps[i].svgInfo.content =
+                            JSON.stringify(payload.steps[i].svgInfo.content);
+                    }
+
+                    // fetch('http://localhost:5000/secondExperiment2', {
+                    fetch('https://nada-statistics.herokuapp.com/secondExperiment2', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    })
+
                     return;
                 }
 
@@ -172,7 +193,7 @@ function setUpColorsForSvg(svgContent) {
     console.log(experimentByColor.colors.outerColor)
 
 
-    const partialResult = svgContent.substring(0, startStyleTag) +
+    let partialResult = svgContent.substring(0, startStyleTag) +
         svgContent.substring(endStyleTag, svgContent.length);
 
     const titleStart = partialResult.indexOf('<title>')

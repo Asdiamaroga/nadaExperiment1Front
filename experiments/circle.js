@@ -1,10 +1,10 @@
-import { noBorderImages, borderImages } from './modules/circleImages.js'
-import { noBorders } from './modules/circleColors.js'
-import { getNumberBetween, shuffleArray } from '../utils/arrayUtils.js'
-import { calcTimeDifference } from '../utils/timeUtils.js'
+import {noBorderImages, borderImages} from './modules/circleImages.js'
+import {noBorders} from './modules/circleColors.js'
+import {getNumberBetween, shuffleArray} from '../utils/arrayUtils.js'
+import {calcTimeDifference} from '../utils/timeUtils.js'
 
 
-const NUMBER_OF_IMAGES = 12;
+const NUMBER_OF_IMAGES = 6;
 const experimentResults = []
 let indexOfColorCombination = 0;
 let indexOfSteps = 0;
@@ -118,12 +118,13 @@ function createPauseStep() {
     const pauseButton = createImageWithColors(0, index);
     pauseButton.style = ''
     pauseButton.classList = ['centered']
-    pauseButton.onclick = () => {}
+    pauseButton.onclick = () => {
+    }
     pauseButton.innerHTML = pauseButton.innerHTML.replace('viewBox="0 0 60 60"', '') // I don't care, I don't have time for this
 
     setPauseStepVisibility('block')
     setCircleContainerVisibility('none')
-    setTimeout(()=> {
+    setTimeout(() => {
         setPauseStepVisibility('none')
         setUpCircles()
         setCircleContainerVisibility('block')
@@ -159,10 +160,26 @@ function setUpCircles() {
     let buttons = []
     for (var index = 0; index < NUMBER_OF_IMAGES; index++) {
         /* add to the wrapper */
-        container.appendChild(
-            createImageWithColors(currentAngle, index)
-        );
+
+        buttons.push(createImageWithColors(currentAngle, index))
+
+        // container.appendChild(createImageWithColors(currentAngle, index))
+
         /* increment the angle incrementer */
+        currentAngle = currentAngle + degreeAngle;
+    }
+
+
+    buttons = shuffleArray(shuffleArray(buttons))
+    currentAngle = 0;
+    for (var index = 0; index < NUMBER_OF_IMAGES; index++) {
+
+        buttons[index].classList = ['circle']
+        buttons[index].style = "transform: rotate(" + currentAngle + "deg)" +
+            "translate(24em)" +
+            "rotate(-" + currentAngle + "deg);"
+
+        container.appendChild(buttons[index])
         currentAngle = currentAngle + degreeAngle;
     }
 }
@@ -175,10 +192,10 @@ function createImageWithColors(currentAngle, index) {
     )
 
     circleElement.onclick = () => {
-        const experimentByColorCombo = experimentResults[indexOfColorCombination]    
+        const experimentByColorCombo = experimentResults[indexOfColorCombination]
         const experimentByStep = experimentByColorCombo[indexOfSteps]
 
-        if(imagesToShow[index].name === experimentByStep.image) {
+        if (imagesToShow[index].name === experimentByStep.image) {
             console.log('correct')
             indexOfSteps = indexOfSteps + 1
 
@@ -186,22 +203,38 @@ function createImageWithColors(currentAngle, index) {
             experimentByStep.timeSpentOnScreen = calcTimeDifference(experimentByStep.startTime)
             delete experimentByStep.startTime
 
-            if (indexOfSteps === 6) {
+            if (indexOfSteps === toBeSelectedImages.length && indexOfColorCombination < 4) {
                 indexOfSteps = 0;
                 indexOfColorCombination += 1
-        
-                experimentResults.push([])
-                for(let i = 0; i < toBeSelectedImages.length; i++) {
-                    toBeSelectedImages[i].wasSelected = false
+
+                if (indexOfColorCombination === 3) {
+                    setCircleContainerVisibility('none')
+                    setEnd('block')
+
+                    let payload = {
+                        experimentName: text,
+                        secondExperimentStatistics: experimentResults
+                    }
+
+                    // fetch('http://localhost:5000/secondExperiment1', {
+                    fetch('https://nada-statistics.herokuapp.com/secondExperiment1', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    })
+                } else {
+                    experimentResults.push([])
+                    for (let i = 0; i < toBeSelectedImages.length; i++) {
+                        toBeSelectedImages[i].wasSelected = false
+                    }
+                    createPauseStep()
                 }
-                createPauseStep()
-            } else if (indexOfColorCombination === 4){
-                setCircleContainerVisibility('none')
-                setEnd('block')
             } else {
                 createPauseStep()
             }
-            
+
         } else {
             console.log('WRONG')
             if (isNaN(experimentByStep.mistakes)) {
@@ -209,7 +242,7 @@ function createImageWithColors(currentAngle, index) {
             } else {
                 experimentByStep.mistakes += 1
             }
-            
+
         }
 
         console.log(experimentResults)
@@ -244,13 +277,13 @@ function cleanUpSvgContent(svgContent) {
     const endStyleTag = svgContent.indexOf('</style>')
 
     const partialResult = svgContent.substring(0, startStyleTag) + svgContent.substring(endStyleTag, svgContent.length);
-    
+
     const titleStart = partialResult.indexOf('<title>')
     const titleEnd = partialResult.indexOf('</title>')
 
     return partialResult.substring(0, titleStart) +
-    partialResult.substring(titleEnd, partialResult.length);
+        partialResult.substring(titleEnd, partialResult.length);
 }
 
 export const name = 'circlesExperiment'
-export { startTheCircleTest }
+export {startTheCircleTest}
