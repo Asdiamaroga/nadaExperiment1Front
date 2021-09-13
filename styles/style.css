@@ -18,7 +18,11 @@ div.container {
     /* bring your own prefixes */
     transform: translate(-50%, -50%);
 }
-  
+
+svg {
+    width: 60px;
+    height: 60px;
+}
 
 .pauseStep {
     display: none;
