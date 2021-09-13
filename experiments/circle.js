@@ -5,7 +5,7 @@ import {calcTimeDifference} from '../utils/timeUtils.js'
 import {getQueryParamFromUrl} from '../utils/urlUtils.js'
 
 
-const NUMBER_OF_IMAGES = 6;
+const NUMBER_OF_IMAGES = 12;
 const experimentResults = []
 let indexOfColorCombination = 0;
 let indexOfSteps = 0;
