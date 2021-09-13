@@ -2,6 +2,7 @@ import { colorDefinitions } from './modules/colors.js'
 import { shuffleArray, getNumberBetween } from '../utils/arrayUtils.js'
 import { calcTimeDifference } from '../utils/timeUtils.js'
 import { images } from './modules/shapesImages.js'
+import {getQueryParamFromUrl} from '../utils/urlUtils.js'
 
 const NUMBER_OF_IMAGES = 4;
 let colorIndex = 0;
@@ -59,7 +60,7 @@ function createPauseStep(experiment) {
         setUpCircle();
         setGridVisibility('grid')
         startGridTimmer();
-    }, 3000)
+    }, getQueryParamFromUrl())
 
     console.log('fileName > ', experimentByColor
         .steps[shapeCounter]

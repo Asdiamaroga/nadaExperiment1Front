@@ -2,6 +2,7 @@ import {noBorderImages, borderImages} from './modules/circleImages.js'
 import {noBorders} from './modules/circleColors.js'
 import {getNumberBetween, shuffleArray} from '../utils/arrayUtils.js'
 import {calcTimeDifference} from '../utils/timeUtils.js'
+import {getQueryParamFromUrl} from '../utils/urlUtils.js'
 
 
 const NUMBER_OF_IMAGES = 6;
@@ -128,7 +129,7 @@ function createPauseStep() {
         setPauseStepVisibility('none')
         setUpCircles()
         setCircleContainerVisibility('block')
-    }, 2000)
+    }, getQueryParamFromUrl())
 
 
     pauseStep.appendChild(pauseButton)
