@@ -8,8 +8,7 @@ function getQueryParamFromUrl() {
 }
 
 function isPractice() {
-    const params = new URLSearchParams(window.location.search)
-    return params.keys.includes('practice');
+    return window.location.href.includes('practice');
 }
 
 export { getQueryParamFromUrl, isPractice }
