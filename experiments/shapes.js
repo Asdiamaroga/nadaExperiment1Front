@@ -2,7 +2,7 @@ import { colorDefinitions } from './modules/colors.js'
 import { shuffleArray, getNumberBetween } from '../utils/arrayUtils.js'
 import { calcTimeDifference } from '../utils/timeUtils.js'
 import { images } from './modules/shapesImages.js'
-import {getQueryParamFromUrl} from '../utils/urlUtils.js'
+import { getQueryParamFromUrl, isPractice } from '../utils/urlUtils.js'
 
 const NUMBER_OF_IMAGES = 4;
 let colorIndex = 0;
@@ -122,19 +122,22 @@ function setUpCircle() {
                         steps: experimentResult[0].steps,
                     }
 
-                    for(let i = 0; i < payload.steps.length; i ++ ) {
+                    for (let i = 0; i < payload.steps.length; i++) {
                         payload.steps[i].svgInfo.content =
                             JSON.stringify(payload.steps[i].svgInfo.content);
                     }
 
+                    if (!isPractice()) {
+                        fetch('https://nada-statistics.herokuapp.com/secondExperiment2', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(payload)
+                        })
+                    }
                     // fetch('http://localhost:5000/secondExperiment2', {
-                    fetch('https://nada-statistics.herokuapp.com/secondExperiment2', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(payload)
-                    })
+
 
                     return;
                 }
@@ -188,7 +191,7 @@ function setUpColorsForSvg(svgContent) {
 
     const startStyleTag = svgContent.indexOf('<style')
     const endStyleTag = svgContent.indexOf('</style>')
-    
+
     // TODO make this nicer, its horrible
     console.log(experimentByColor.colors.innerColor)
     console.log(experimentByColor.colors.outerColor)
@@ -201,7 +204,7 @@ function setUpColorsForSvg(svgContent) {
     const titleEnd = partialResult.indexOf('</title>')
 
     partialResult = partialResult.substring(0, titleStart) +
-    partialResult.substring(titleEnd, partialResult.length);
+        partialResult.substring(titleEnd, partialResult.length);
 
     return partialResult
         .replace('fill="#inner"', `fill="${experimentByColor.colors.innerColor}"`)

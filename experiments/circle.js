@@ -1,8 +1,8 @@
-import {noBorderImages, borderImages} from './modules/circleImages.js'
-import {noBorders} from './modules/circleColors.js'
-import {getNumberBetween, shuffleArray} from '../utils/arrayUtils.js'
-import {calcTimeDifference} from '../utils/timeUtils.js'
-import {getQueryParamFromUrl} from '../utils/urlUtils.js'
+import { noBorderImages, borderImages } from './modules/circleImages.js'
+import { noBorders } from './modules/circleColors.js'
+import { getNumberBetween, shuffleArray } from '../utils/arrayUtils.js'
+import { calcTimeDifference } from '../utils/timeUtils.js'
+import { getQueryParamFromUrl, isPractice } from '../utils/urlUtils.js'
 
 
 const NUMBER_OF_IMAGES = 12;
@@ -92,6 +92,13 @@ function setUpExperiment() {
     createPauseStep()
 }
 
+
+function setUpStartTimeForCircles() {
+    const experimentByColorCombo = experimentResults[indexOfColorCombination]
+    const experimentByStep = experimentByColorCombo[indexOfSteps]
+    experimentByStep.startTime = new Date()
+}
+
 function createPauseStep() {
     let found = false;
     // TODO super bad, rework
@@ -105,7 +112,7 @@ function createPauseStep() {
 
             experimentByStep.image = toBeSelectedImages[index].name
             experimentByStep.color = noBorders[text][indexOfColorCombination][index]
-            experimentByStep.startTime = new Date()
+            
             found = true;
             toBeSelectedImages[index].wasSelected = true
         } else {
@@ -129,6 +136,7 @@ function createPauseStep() {
         setPauseStepVisibility('none')
         setUpCircles()
         setCircleContainerVisibility('block')
+        setUpStartTimeForCircles();
     }, getQueryParamFromUrl())
 
 
@@ -217,14 +225,17 @@ function createImageWithColors(currentAngle, index) {
                         secondExperimentStatistics: experimentResults
                     }
 
-                    // fetch('http://localhost:5000/secondExperiment1', {
-                    fetch('https://nada-statistics.herokuapp.com/secondExperiment1', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(payload)
-                    })
+                    if (!isPractice()) {
+                        // fetch('http://localhost:5000/secondExperiment1', {
+                        fetch('https://nada-statistics.herokuapp.com/secondExperiment1', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(payload)
+                        })
+                    }
+
                 } else {
                     experimentResults.push([])
                     for (let i = 0; i < toBeSelectedImages.length; i++) {
@@ -287,4 +298,4 @@ function cleanUpSvgContent(svgContent) {
 }
 
 export const name = 'circlesExperiment'
-export {startTheCircleTest}
+export { startTheCircleTest }

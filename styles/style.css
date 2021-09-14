@@ -47,6 +47,10 @@ svg {
 
 .end {
     display: none;
+
+    font-size: 35px;
+    color: #000000;
+    font: "Calibri Bold";
 }
 
 .circle {

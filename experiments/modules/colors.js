@@ -14,7 +14,7 @@ const colorDefinitions = {
         outerColor: '#FF0FFF'
     },
     'YG':{
-        innerColor: '#FF0FFF',
+        innerColor: '#858500',
         outerColor: '#75FF75'
     },
     'YM':{

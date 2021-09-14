@@ -7,4 +7,9 @@ function getQueryParamFromUrl() {
     return seconds ? 1000 * seconds : 3000;
 }
 
-export { getQueryParamFromUrl }
+function isPractice() {
+    const params = new URLSearchParams(window.location.search)
+    return params.keys.includes('practice');
+}
+
+export { getQueryParamFromUrl, isPractice }
