@@ -185,7 +185,7 @@ function setUpCircles() {
 
         buttons[index].classList = ['circle']
         buttons[index].style = "transform: rotate(" + currentAngle + "deg)" +
-            "translate(24em)" +
+            "translate(34em)" +
             "rotate(-" + currentAngle + "deg);"
 
         container.appendChild(buttons[index])

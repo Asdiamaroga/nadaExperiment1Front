@@ -2,9 +2,9 @@
 .circle-container {
     display: none;
     position: relative;
-    width: 48em;
-    height: 48em;
-    padding: 2.8em;
+    width: 68em;
+    height: 68em;
+
     /*= 2em * 1.4 (2em = half the width of an img, 1.4 = sqrt(2))*/
     border-radius: 50%;
     margin: 1.75em auto 0;

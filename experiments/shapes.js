@@ -165,7 +165,7 @@ function setUpCircle() {
 
         svg.classList = ['circle']
         svg.style = "transform: rotate(" + currentAngle + "deg)" +
-            "translate(24em)" +
+            "translate(34em)" +
             "rotate(-" + currentAngle + "deg);"
 
         currentAngle = currentAngle + degreeAngle;
